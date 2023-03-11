@@ -44,11 +44,25 @@ const addMiddlewares = () => {
       extended: true,
     })
   );
+  const allowedOrigins = [
+    "https://mern-auth-demo.vercel.app",
+    "http://localhost:3000",
+  ];
+  var corsOptions = {
+    origin: function (origin, callback) {
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  };
   // const corsOptions = {
   //   origin: "http://localhost:3000",
   //   credentials: true,
   // };
   // app.use(cors(corsOptions));
+  app.use(cors(corsOptions));
   app.use(cors());
   cloudinaryConfig();
   app.use(passport.initialize());
