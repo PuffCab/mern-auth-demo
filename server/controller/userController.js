@@ -67,6 +67,7 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
   console.log("req.body", req.body);
+  console.log("req", req);
 
   try {
     const existingUser = await userModel.findOne({ email: req.body.email });
